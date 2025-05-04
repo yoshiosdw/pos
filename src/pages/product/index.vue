@@ -3,6 +3,7 @@ import axiosIns from "@/plugins/axios"
 import { ref, watchEffect, computed } from "vue"
 import { useToast } from "vue-toastification"
 
+import Product from './product.vue'
 import Chart from './chart.vue'
 import { useCartStore } from './useCartStore'
 
@@ -47,18 +48,13 @@ const toast = useToast()
     <!-- Header -->
     <div class="d-flex justify-space-between align-center mb-6">
       <h2>Products</h2>
-      <div>
-        <VBtn
-          color="primary"
-          class="mx-2"
-        >
-          + Add Category
-        </VBtn>
-        <VBtn color="secondary">
-          + Add Product
-        </VBtn>
-        <!-- Gunakan Chart dengan activator tombol bawaan -->
-        <Chart />
+      <div class="d-flex align-center">
+        <div style="margin-right: 16px;">
+          <Product />
+        </div>
+        <div>
+          <Chart />
+        </div>
       </div>
     </div>
 
@@ -85,9 +81,10 @@ const toast = useToast()
             <h4>{{ product.name }}</h4>
             <p>Rp {{ product.price.toLocaleString() }}</p>
           </div>
-          <div class="d-flex justify-space-between mt-auto">
+          <div class="d-flex justify-end mt-auto">
             <VBtn
-              color="success"
+              color="primary"
+              variant="outlined"
               small
               @click="addToCart(product)"
             >
@@ -95,7 +92,9 @@ const toast = useToast()
             </VBtn>
             <VBtn
               color="error"
+              variant="outlined"
               small
+              style="margin-left: 8px"
               @click="removeFromCart(product.id)"
             >
               Delete
